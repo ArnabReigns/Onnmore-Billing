@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <style>
+        *
+        {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: system-ui,'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: normal;
+        }
+        .header 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 3rem;
+            color: white;
+            background-color: black ;
+        }
+
+        .header h1 
+        {
+            padding: 0.3rem;
+            border-bottom: 3px solid #40B983;
+        }
+
+        .body 
+        {
+            padding: 2rem 3rem;
+        }
+        
+        .flex-cont
+        {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .flex-cont h3 
+        {
+            font-weight: 600;
+        }
+
+        .th
+        {
+            background-color: #40B983;
+            padding: 0.4rem 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .tr 
+        {
+            text-align: right;
+        }
+
+        .tc 
+        {
+            text-align: center;
+        }
+
+        .row 
+        {
+            display: flex;
+        }
+        .col 
+        {
+            flex: 1;
+        }
+        .col:nth-child(1)
+        {
+            flex: 3;
+        }
+
+        .tb .row 
+        {
+            padding: 0.5rem 1rem;
+        } 
+        
+        .total 
+        {
+            padding: 0.5rem 1rem;
+            border-top: 1px solid rgb(169, 169, 169);
+            margin-top: 1rem;
+        } 
+        
+        .signeture 
+        {   
+            margin-top: 5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signeture .right 
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;    
+        }
+
+        .signeture .right span 
+        {
+            background-color: #40B983;
+            height: 2px;
+            width: 100%;
+        }
+        
+
+        .signeture img 
+        {
+            width: 10rem;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img src="data:image/png;base64,<%=data.logo%>" alt=""> 
+            <h1>INVOICE</h1>
+        </div>
+
+         
+
+        <div class="body">
+
+            <div class="flex-cont">
+
+                <div class="company">
+                    <h3>Onnmore Private Limited</h3>
+                    <h4>support@onnmore.com</h4>
+                    <h4>8047537102</h4>
+                    <h4>Newtown,Sector V,Kolkata</h4>
+                </div>
+
+                <div class="invoice tr" >
+                    <h4>Invoice No : <%=data.invoiceNum%></h4>
+                    <h4>Date : <%=new Date().toISOString().slice(0,10) %></h4>
+                </div>
+
+            </div>
+
+            <div class="flex-cont">
+
+                <div class="Customer">
+
+                    <h3>Billed To</h3>
+                    <h4><%= data.invoice?.customerName || "Customer Name" %></h4>
+                    <h4><%= data.invoice?.customerEmail || "Customer Email" %></h4>
+                    <h4><%= data.invoice?.customerPhone || "Customer Phone" %></h4>
+                    <h4><%= data.invoice?.customerAddress || "Customer Address" %></h4>
+                </div>
+
+            </div>
+
+            
+            <div class="table">
+                <div class="th">
+                    <div class="row">
+                        <div class="col">Service Name</div>
+                        <div class="col tc">Qty</div>
+                        <div class="col tr">Amount</div>
+                    </div>
+                </div>
+                <div class="tb">
+                    <% data.invoice?.services?.map((service,idx) => {%>
+                        <div class="row">
+                            <div class="col"><%= service?.name || "Service Name" %></div>
+                            <div class="col tc"><%= service?.qty || "1" %></div>
+                            <div class="col tr"><%= service?.price || "Price " %> rs.</div>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="th">
+                    <div class="row">
+                        <div class="col">Products Name</div>
+                        <div class="col tc">Qty</div>
+                        <div class="col tr">Amount</div>
+                    </div>
+                </div>
+                <div class="tb">
+                    <% data.invoice?.products?.map((product,idx) => {%>
+                        <div class="row">
+                            <div class="col"><%= product?.name || "Product Name" %></div>
+                            <div class="col tc"><%= product?.qty || "1" %></div>
+                            <div class="col tr"><%= product?.price || "Price " %> rs.</div>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <div class="total">
+                    <div class="row">
+                        <div class="col">Sub Total</div>
+                        <div class="col tr"><%= data.invoice?.subTotal || "Price " %> rs.</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">GST (14%)</div>
+                        <div class="col tr"><%= data.gst %> rs.</div>
+                    </div>
+
+                    <% if(data.invoice?.discount) {%>
+                        <div class="row">
+                            <div class="col">Discount (<%= data.invoice?.discount %>%)</div>
+                            <div class="col tr"> <%= data.discount || "discount" %> rs.</div>
+                        </div>
+                    <% } %>
+                
+                </div>
+                <div class="total">
+                    <div class="row">
+                        <div class="col">Total Amount</div>
+                        <div class="col tr"><%= data.invoice?.total || "Price " %> rs.</div>
+                    </div>
+                </div>
+                
+                <div class="signeture">
+                    <div class="left">
+
+                    </div>
+                    <div class="right">
+                        <img src="data:image/png;base64,<%=data.signeture%>" alt="">
+                        <span></span>
+                        <h3>signeture</h3> 
+                    </div>
+                </div>
+        </div>
+
+    </body>
+</html>
