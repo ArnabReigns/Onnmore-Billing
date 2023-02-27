@@ -13,7 +13,7 @@ async function main(invoiceNumber,invoicePath,invoice) {
 
   let info = await transporter.sendMail({
     from: '"onnmore.com" <arnab.dev.09@gmail.com>', // sender address
-    to: "arnabchatterjee912@gmail.com", // list of receivers subhajitmaji167@gmail.com
+    to: "arnabchatterjee912@gmail.com,subhajitmaji167@gmail.com", // list of receivers subhajitmaji167@gmail.com
     subject: "Invoice from onnmore.com", // Subject line
     text: `Hello ${invoice.customerName},
 
