@@ -6,19 +6,31 @@ import { InvoiceContext } from "../Context/InvoiceContext";
 import ServiceContainer from "../Components/ServiceContainer";
 import ProductContainer from "../Components/ProductsContainer";
 import TotalCard from "../Components/TotalCard";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Main = () => {
   const { invoice } = useContext(InvoiceContext);
+  const notify = () => toast.promise("Sending Invoice");
 
   const handleSubmit = () => {
     // console.log(invoice);
-    fetch("http://localhost:3000/generateinvoice", {
+    if(invoice.subTotal == 0) return;
+      
+    console.log("sending");
+    var promis = fetch("http://localhost:3000/generateinvoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(invoice), // body data type must match "Content-Type" header
-    });
+    }).then(res=> res.json()).then(json=>console.log(json));
+    
+    toast.promise(promis,{
+      pending:"Sending...",
+      success:"Successfully sent invoice",
+      error:"Something went wrong",
+    })
   };
 
   return (
@@ -45,10 +57,10 @@ const Main = () => {
           />
         </Card>
 
-        <Card title="Service Details" />
+        {/* <Card title="Service Details" /> */}
         <ServiceContainer />
 
-        <Card title="Product Details" />
+        {/* <Card title="Product Details" /> */}
         <ProductContainer />
 
         <Card title="Discount (%)">
@@ -64,7 +76,19 @@ const Main = () => {
           <TotalCard />
         </Card>
 
-        <button onClick={handleSubmit}>Send Invoice</button>
+        <button className="submitButton" onClick={handleSubmit}>Send Invoice</button>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          />
       </form>
     </div>
   );

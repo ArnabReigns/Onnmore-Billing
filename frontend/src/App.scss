@@ -67,6 +67,11 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
 }
 
+.serviceContainer h2 
+{
+    color: #4ABB83;
+}
+
 @media (width < 768px) {
 
     .card 
@@ -189,5 +194,23 @@ button
     {
         font-size: 1rem;
         color: #4ABB83;
+    }
+}
+
+.submitButton 
+{
+    padding: 0.5rem 2rem;
+    font-size: 1.3rem;
+    background-color:#4ABB83;
+    transition: 0.3s;
+
+    &:hover
+    {
+        color:white;
+    }
+
+    &:active
+    {
+        background-color: #256243;
     }
 }

@@ -21,7 +21,7 @@ const TotalCard = () => {
     setSubtotal(total.toFixed(2));
 
     if (total > 0) {
-      let gst = (total * 14) / 100;
+      let gst = (total * 18) / 100;
       setGST(gst.toFixed(2));
       total += gst;
     } else {
@@ -48,19 +48,19 @@ const TotalCard = () => {
   return (
     <div className="totalCard">
       <p>
-        Subtotal : <span>{subtotal} rs.</span>
+        Subtotal : <span>Rs. {subtotal}</span>
       </p>
       <p>
-        GST (14%) : <span>{GST} rs.</span>
+        GST (18%) : <span>Rs. {GST}</span>
       </p>
       {invoice.discount > 0 && (
         <p>
-          Discount ({invoice.discount}%) : <span>{discount} rs.</span>
+          Discount ({invoice.discount}%) : <span>Rs. {discount}</span>
         </p>
       )}
       <hr />
       <p>
-        Total : <span>{total} rs.</span>
+        Total : <span>Rs. {total}</span>
       </p>
     </div>
   );

@@ -168,7 +168,7 @@
                         <div class="row">
                             <div class="col"><%= service?.name || "Service Name" %></div>
                             <div class="col tc"><%= service?.qty || "1" %></div>
-                            <div class="col tr"><%= service?.price || "Price " %> rs.</div>
+                            <div class="col tr">Rs. <%= service?.price || "Price " %></div>
                         </div>
                     <% }) %>
                 </div>
@@ -184,7 +184,7 @@
                         <div class="row">
                             <div class="col"><%= product?.name || "Product Name" %></div>
                             <div class="col tc"><%= product?.qty || "1" %></div>
-                            <div class="col tr"><%= product?.price || "Price " %> rs.</div>
+                            <div class="col tr">Rs. <%= product?.price || "Price " %></div>
                         </div>
                     <% }) %>
                 </div>
@@ -192,17 +192,17 @@
                 <div class="total">
                     <div class="row">
                         <div class="col">Sub Total</div>
-                        <div class="col tr"><%= data.invoice?.subTotal || "Price " %> rs.</div>
+                        <div class="col tr">Rs. <%= data.invoice?.subTotal || "Price " %></div>
                     </div>
                     <div class="row">
                         <div class="col">GST (14%)</div>
-                        <div class="col tr"><%= data.gst %> rs.</div>
+                        <div class="col tr">Rs. <%= data.gst %></div>
                     </div>
 
                     <% if(data.invoice?.discount) {%>
                         <div class="row">
                             <div class="col">Discount (<%= data.invoice?.discount %>%)</div>
-                            <div class="col tr"> <%= data.discount || "discount" %> rs.</div>
+                            <div class="col tr">Rs. <%= data.discount || "discount" %></div>
                         </div>
                     <% } %>
                 
@@ -210,7 +210,7 @@
                 <div class="total">
                     <div class="row">
                         <div class="col">Total Amount</div>
-                        <div class="col tr"><%= data.invoice?.total || "Price " %> rs.</div>
+                        <div class="col tr">Rs. <%= data.invoice?.total || "Price " %> </div>
                     </div>
                 </div>
                 

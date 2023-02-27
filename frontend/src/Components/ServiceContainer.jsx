@@ -31,10 +31,10 @@ const ServiceContainer = () => {
     
     const setupService = (e) => {
         var {name,value} = e.target;        
-        if(name == 'service') {
+        if(name == 'Service') {
             setService(serviceList.find(service=> service.name == value));
         }
-        else if(name == 'category') {
+        else if(name == 'Category') {
             setFilteredService(serviceList.filter(service => service.category === value));
         }
     };
@@ -42,11 +42,12 @@ const ServiceContainer = () => {
 
     return (
     <div className='serviceContainer'>
+        <h2 style={{marginBottom:"1rem"}}>Service Details</h2>
     {invoice.services.map((service,idx) => <Service key={idx} id={idx} service={service}/> )}
     
     <div className="menu-container">
-        <Dropdown disabled={!filteredService.length} name='category' items={categories} cb={setupService} value={service?.category}/>
-        <Dropdown  disabled={!filteredService.length} name='service' items={filteredService} cb={setupService} value={service?.name}/>
+        <Dropdown disabled={!filteredService.length} name='Category' items={categories} cb={setupService} value={service?.category}/>
+        <Dropdown  disabled={!filteredService.length} name='Service' items={filteredService} cb={setupService} value={service?.name}/>
         <button disabled={!filteredService.length} onClick={()=> addService(service)}>Add</button>
     </div>
     </div>

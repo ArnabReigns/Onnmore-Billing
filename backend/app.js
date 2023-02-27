@@ -45,10 +45,11 @@ app.post("/generateinvoice", (req, res) => {
   pdfGenerator.createPdf('./views/invoice-tempalte.ejs',data,'output')
   .then(path => {
     console.log(path);
-    email(invoiceNum,path,req.body);
+    email(invoiceNum,path,req.body).then(response => res.json({success:true,statusCode:200,message:"Successfully sent invoice",
+    data: {
+      invoiceNum:invoiceNum
+    }}));
   });
-
-  res.render('invoice-tempalte',{data:data});
   
 });
 

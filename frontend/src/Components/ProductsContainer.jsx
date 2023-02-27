@@ -17,7 +17,7 @@ const ProductsContainer = () => {
 
     const setupProduct = (e) => {
         var {name,value} = e.target;        
-        if(name == 'product') {
+        if(name == 'Product') {
             setProduct(productsList.find(product=> product.name == value));
         }
     };
@@ -25,10 +25,12 @@ const ProductsContainer = () => {
     return (
     <div className='serviceContainer'>
 
+    <h2 style={{marginBottom:"1rem"}}>Product Details</h2>
+
     {invoice.products.map((product,idx) => <Product key={idx} id={idx} product={product}/> )}
     
     <div className="menu-container">
-        <Dropdown disabled={!productsList.length} name="product" items={productsList} cb={setupProduct}/>
+        <Dropdown disabled={!productsList.length} name="Product" items={productsList} cb={setupProduct}/>
         <button disabled={!productsList.length} onClick={()=> addProduct(product)}>Add</button>
     </div>
     </div>
