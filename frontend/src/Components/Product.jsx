@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
 import { InvoiceContext } from '../Context/InvoiceContext'
+import QuantityBox from './QuantityBox';
 
 const Product = (props) => {
   
-  const {removeProduct} = useContext(InvoiceContext);
+  const {removeProduct,upadateProductQuantity} = useContext(InvoiceContext);
+
+  function upadateQty(qty)
+  {
+    upadateProductQuantity(props.id,qty);
+  };
   
   return (
     <div className='service'>
@@ -17,7 +23,10 @@ const Product = (props) => {
         <h1>Price</h1>
         <h2>{props.product?.price} rs.</h2>
         </div>
-        <button onClick={()=>removeProduct(props?.id)}>delete</button>
+        <div className="btnCont">
+          <QuantityBox cb={upadateQty}/>
+          <button onClick={()=>removeProduct(props.id)}>delete</button>
+        </div>
     </div>
   )
 }

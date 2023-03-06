@@ -50,6 +50,8 @@ const InvoiceContextProvider = ({ children }) => {
     }));
   };
 
+
+
   // service methods
 
   const addService = (service) => {
@@ -67,6 +69,20 @@ const InvoiceContextProvider = ({ children }) => {
       services: services,
     }));
   };
+
+  //service quantity
+
+  const upadateServiceQuantity = (idx,qty) => {
+    var services = invoice.services;
+    var price = services[idx]["price"];
+    var prevQty = services[idx]["qty"] || 1;
+    services[idx]["qty"] = qty;
+    services[idx]["price"] = (price/prevQty) * qty;
+    setInvoice((prevState) => ({
+      ...prevState,
+      services: services,
+    }));
+  }
 
   // product methods
 
@@ -86,6 +102,21 @@ const InvoiceContextProvider = ({ children }) => {
       products: products,
     }));
   };
+
+  //product quantity
+
+  const upadateProductQuantity = (idx,qty) => {
+    var products = invoice.products;
+    var price = products[idx]["price"];
+    var prevQty = products[idx]["qty"] || 1;
+    products[idx]["qty"] = qty;
+    products[idx]["price"] = (price/prevQty) * qty;
+
+    setInvoice((prevState) => ({
+      ...prevState,
+      products: products,
+    }));
+  }
 
   //total method
   const updateTotal = (total) => {
@@ -117,6 +148,8 @@ const InvoiceContextProvider = ({ children }) => {
     updateTotal,
     updateSubTotal,
     updateDiscount,
+    upadateServiceQuantity,
+    upadateProductQuantity
   };
 
   return (

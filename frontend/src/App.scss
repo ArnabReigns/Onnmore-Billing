@@ -118,7 +118,7 @@ input::-webkit-inner-spin-button {
 
 .service button
 {
-    margin-top: 1rem;
+    // margin-top: 1rem;
     background-color: rgb(154, 24, 24);
     color: white;
     width: fit-content;
@@ -175,6 +175,8 @@ button
     background-color: gray;
     border-radius: 5px;
 }
+
+
 .totalCard 
 {
     color: gray;
@@ -212,5 +214,42 @@ button
     &:active
     {
         background-color: #256243;
+    }
+}
+
+
+.btnCont 
+{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+    
+
+    .quantBox 
+    {
+        display: flex;
+        align-items: stretch;
+        border-radius: 5px;
+        overflow: hidden;
+
+        
+
+        button 
+        {
+            background-color:#4ABB83;
+            border-radius: 0;
+            padding: auto;
+        }
+
+        .qty
+        {
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            background-color: rgb(230, 230, 230);
+            color: black;
+            margin: 0 4px;
+        }
     }
 }
